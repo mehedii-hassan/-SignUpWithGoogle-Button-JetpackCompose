@@ -1,5 +1,6 @@
 package com.example.jetpackcomposepractice
 
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -47,6 +48,9 @@ var clicked by remember { mutableStateOf(false) }
                 painter = painterResource(id = R.drawable.ic_google_logo),
                 contentDescription = "Google Button",
                 tint = Color.Unspecified,
+                modifier = Modifier
+                    .width(20.dp)
+                    .height(20.dp)
             )
             Spacer(modifier = Modifier.width(8.dp))
             Text("Sign Up With Google")

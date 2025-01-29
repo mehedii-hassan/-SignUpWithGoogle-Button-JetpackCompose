@@ -30,7 +30,16 @@ class MainActivity : ComponentActivity() {
         setContent {
             JetpackComposePracticeTheme {
 
-                GoogleButton()
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(color = MaterialTheme.colorScheme.primary),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    GoogleButton()
+
+                }
             }
         }
     }
@@ -46,8 +55,8 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         var text by remember { mutableStateOf("Type here") }
         TextField(value = text, onValueChange = { newText ->
             text = newText
-        },label = {
-            Text(text="Title")
+        }, label = {
+            Text(text = "Title")
         }
         )
 
@@ -58,6 +67,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun DefaultPreview() {
     JetpackComposePracticeTheme {
-        Greeting("")
+        GoogleButton()
     }
 }
