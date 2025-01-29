@@ -1,6 +1,9 @@
 package com.example.jetpackcomposepractice
 
 import android.widget.Toast
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -18,19 +21,30 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcomposepractice.ui.theme.Shapes
 
 @Composable
-fun GoogleButton() {
-var clicked by remember { mutableStateOf(false) }
+fun GoogleButton(
+    text: String = "Sign Up with Google",
+    loadingText: String = "Creating Account...",
+    icon: Painter = painterResource(id = R.drawable.ic_google_logo),
+    shape: Shape = Shapes.medium,
+    borderColor: Color = Color.LightGray,
+    backgroundColor: Color = MaterialTheme.colorScheme.surface,
+    progressIndicatorColor: Color = MaterialTheme.colorScheme.primary,
+    onClicked: () -> Unit
+) {
+    var clicked by remember { mutableStateOf(false) }
     Surface(
-        onClick ={clicked = !clicked},
-        shape = Shapes.medium,
-        border = BorderStroke(width = 1.dp, color = Color.LightGray),
-        color = MaterialTheme.colorScheme.surface
+        onClick = { clicked = !clicked },
+        shape = shape,
+        border = BorderStroke(width = 1.dp, color = borderColor),
+        color = backgroundColor
 
     ) {
         Row(
@@ -40,12 +54,18 @@ var clicked by remember { mutableStateOf(false) }
                     end = 16.dp,
                     top = 12.dp,
                     bottom = 12.dp
+                )
+                .animateContentSize(
+                    animationSpec = tween(
+                        durationMillis = 300,
+                        easing = LinearOutSlowInEasing
+                    )
                 ),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_google_logo),
+                painter = icon,
                 contentDescription = "Google Button",
                 tint = Color.Unspecified,
                 modifier = Modifier
@@ -53,16 +73,18 @@ var clicked by remember { mutableStateOf(false) }
                     .height(20.dp)
             )
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Sign Up With Google")
+            Text(if (clicked) loadingText else text)
 
-            if(clicked){
+            Spacer(modifier = Modifier.width(8.dp))
+            if (clicked) {
                 CircularProgressIndicator(
                     modifier = Modifier
                         .height(16.dp)
                         .width(16.dp),
                     strokeWidth = 2.dp,
-                    color = MaterialTheme.colorScheme.primary
+                    color = progressIndicatorColor
                 )
+                onClicked()
             }
         }
 
@@ -74,5 +96,9 @@ var clicked by remember { mutableStateOf(false) }
 @Composable
 @Preview(showSystemUi = true)
 fun GoogleButtonPreview() {
-    GoogleButton()
+    GoogleButton(
+        text = "Sign Up with Google",
+        loadingText = "Creating Account..",
+        onClicked = {}
+    )
 }

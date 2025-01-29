@@ -1,6 +1,8 @@
 package com.example.jetpackcomposepractice
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -37,7 +39,13 @@ class MainActivity : ComponentActivity() {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    GoogleButton()
+                    GoogleButton(
+                        text = "Sign Up with Google",
+                        loadingText = "Creating Account..",
+                        onClicked = {
+                            Log.d("TAG","Clicked")
+                        }
+                    )
 
                 }
             }
@@ -67,6 +75,10 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun DefaultPreview() {
     JetpackComposePracticeTheme {
-        GoogleButton()
+        GoogleButton(
+            text = "Sign Up with Google",
+            loadingText = "Creating Account..",
+            onClicked = {  }
+        )
     }
 }
