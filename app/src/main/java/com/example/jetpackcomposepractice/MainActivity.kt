@@ -22,9 +22,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcomposepractice.ui.theme.JetpackComposePracticeTheme
+import java.util.List
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +51,15 @@ class MainActivity : ComponentActivity() {
                         }
                     )
                     PasswordTextField()
+                    GradientButton(
+                        gradient = Brush.horizontalGradient(
+                            colors = listOf(
+                                colorResource(R.color.purple_200),
+                                colorResource(R.color.purple_500)
+                            )
+                        ),
+                        onClick = {}
+                    )
 
                 }
             }

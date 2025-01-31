@@ -15,9 +15,9 @@ fun PasswordTextField() {
 
     var password by rememberSaveable { mutableStateOf("") }
 
-    var passwordVisibility by remember { mutableStateOf(false) }
+    var isPasswordVisible by remember { mutableStateOf(false) }
 
-    val icon = if (passwordVisibility)
+    val icon = if (isPasswordVisible)
         painterResource(id = R.drawable.baseline_visibility_24)
     else painterResource(id = R.drawable.baseline_visibility_off_24)
 
@@ -30,7 +30,7 @@ fun PasswordTextField() {
         label = { Text("password") },
         trailingIcon = {
             IconButton(onClick = {
-                passwordVisibility = !passwordVisibility
+                isPasswordVisible = !isPasswordVisible
             }) {
                 Icon(
                     painter = icon,
@@ -39,7 +39,7 @@ fun PasswordTextField() {
             }
         },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-        visualTransformation = if (passwordVisibility) VisualTransformation.None
+        visualTransformation = if (isPasswordVisible) VisualTransformation.None
         else PasswordVisualTransformation()
 
     )
