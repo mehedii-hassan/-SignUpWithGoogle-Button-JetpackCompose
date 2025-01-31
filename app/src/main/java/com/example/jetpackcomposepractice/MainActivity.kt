@@ -22,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jetpackcomposepractice.ui.theme.JetpackComposePracticeTheme
 
@@ -35,7 +36,7 @@ class MainActivity : ComponentActivity() {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(color = MaterialTheme.colorScheme.primary),
+                        .background(color = Color.White),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -43,9 +44,10 @@ class MainActivity : ComponentActivity() {
                         text = "Sign Up with Google",
                         loadingText = "Creating Account..",
                         onClicked = {
-                            Log.d("TAG","Clicked")
+                            Log.d("TAG", "Clicked")
                         }
                     )
+                    PasswordTextField()
 
                 }
             }
@@ -78,7 +80,7 @@ fun DefaultPreview() {
         GoogleButton(
             text = "Sign Up with Google",
             loadingText = "Creating Account..",
-            onClicked = {  }
+            onClicked = { }
         )
     }
 }
